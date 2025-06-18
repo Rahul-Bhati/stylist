@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router';
 import { Home, MessageCircle, User } from 'lucide-react-native';
+import { BlurView } from 'expo-blur';
 
 export default function TabLayout() {
   return (
@@ -7,11 +8,12 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
+          // position: "absolute",
           backgroundColor: '#1A1A1A',
-          borderTopWidth: 0,
-          height: 90,
-          paddingBottom: 24,
-          paddingTop: 16,
+          // borderTopWidth: 0,
+          // height: 90,
+          // paddingBottom: 24,
+          // paddingTop: 16,
         },
         tabBarActiveTintColor: '#FFFFFF',
         tabBarInactiveTintColor: '#666666',
@@ -19,6 +21,17 @@ export default function TabLayout() {
           fontSize: 12,
           fontFamily: 'Inter-Medium',
         },
+        tabBarBackground: () => (
+          <BlurView
+            intensity={80}
+            // tint='dark'
+            style={{
+              // position: "absolute",
+              // backgroundColor: 'transparent',
+              overflow: 'hidden',
+            }}
+          />
+        )
       }}>
       <Tabs.Screen
         name="index"

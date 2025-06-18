@@ -76,6 +76,14 @@ export default function HomeScreen() {
     return pattern[index % 6];
   };
 
+  // stlist name not exceed 14 char, only show 14 char
+  const truncateName = (name: string) => {
+    if (name.length > 14) {
+      return name.slice(0, 14) + '..';
+    }
+    return name;
+  };
+
   const renderStylistCard = (stylist: any, index: number) => (
     <TouchableOpacity
       key={stylist.id}
@@ -98,10 +106,56 @@ export default function HomeScreen() {
         className="w-full h-full absolute rounded-xl self-center"
       />
  
-      <View className="absolute bottom-1 left-2 z-10 rounded-full bg-dark-grey/90 p-2 px-4 w-[90%]">
+      {/* <View className="absolute bottom-1 left-2 z-10 rounded-full bg-dark-grey/90 p-2 px-4 w-[90%] backdrop-blur-3xl">
         <Text className="text-white text-lg font-bold font-WorkSansBold">{stylist.price}$</Text>
         <Text className="text-white text-sm opacity-90 font-WorkSansRegular">{stylist.name}</Text>
-      </View>
+      </View> */}
+
+<BlurView
+  className='rounded-full'
+  experimentalBlurMethod='dimezisBlurView'
+  intensity={60}
+  tint='dark'
+  style={{
+    borderRadius: 9999, // Large radius for fully rounded corners (button-like)
+    overflow: 'hidden',
+    position: 'absolute',
+    backgroundColor: '#00', // Semi-transparent background
+    width: '95%', // Use percentage width for responsiveness
+    height: 60, // Fixed height to control shape (adjust as needed)
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    left: 4,
+    bottom: 6,
+    zIndex: 10
+  }}
+>
+  <Text className="text-white text-lg font-bold font-WorkSansBold">{stylist.price}$</Text>
+  <Text className="text-white text-sm opacity-90 font-WorkSansRegular">{truncateName(stylist.name)}</Text>
+</BlurView>
+
+{/* 
+       <BlurView
+       className='rounded-full'
+                experimentalBlurMethod='dimezisBlurView'
+                intensity={90}
+                tint='dark'
+                style={{
+                  borderRadius:"50%",
+                  overflow: 'hidden',
+                  position: 'absolute',
+                  backgroundColor: '#00',
+                  width: '90%',
+                  paddingHorizontal: 16,
+                  paddingVertical:8,
+                  left:6,
+                  bottom: 12,
+                  zIndex: 10,
+                }}
+              >
+      <Text className="text-white text-lg font-bold font-WorkSansBold">{stylist.price}$</Text>
+      <Text className="text-white text-sm opacity-90 font-WorkSansRegular">{truncateName(stylist.name)}</Text>
+              </BlurView> */}
     </TouchableOpacity>
   );
 
@@ -122,6 +176,7 @@ export default function HomeScreen() {
           {stylists.map((stylist, index) => renderStylistCard(stylist, index))}
         </View>
       </ScrollView>
+      
     </SafeAreaView>
   );
 }
