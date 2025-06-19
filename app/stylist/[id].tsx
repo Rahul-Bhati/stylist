@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Dimensions
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { ArrowLeft, ChevronDown } from 'lucide-react-native';
+import ProfileCarousel from '@/components/ProfileCarousel';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -31,10 +32,55 @@ export default function StylistDetailScreen() {
     router.push(`/calendar/${id}?data=${encodeURIComponent(JSON.stringify(stylist))}`);
   };
 
-  const images = [
-    'https://images.pexels.com/photos/3785077/pexels-photo-3785077.jpeg',
-    'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg',
-    'https://images.pexels.com/photos/3764119/pexels-photo-3764119.jpeg',
+  const slides = [
+    {
+      id: '1',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/MegaGengar.jpg',
+      title: 'Gengar',
+    },
+    {
+      id: '2',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/Lugia.jpg',
+      title: 'Lugia',
+    },
+    {
+      id: '3',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/MegeLucario.jpg',
+      title: 'Mega Lucario',
+    },
+    {
+      id: '4',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/zacian.jpg',
+      title: 'Zacian',
+    },
+    {
+      id: '5',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/MegaCharizard.jpg',
+      title: 'Mega Charizard',
+    },
+    {
+      id: '6',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/zacianAndZamazenta.jpg',
+      title: 'Zacian and Zamazenta',
+    },
+    {
+      id: '7',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/Lucario.jpg',
+      title: 'Lucario',
+    },
+    {
+      id: '8',
+      image:
+        'https://raw.githubusercontent.com/siddnlw/codepen-assets/refs/heads/main/img/Charizard.jpg',
+      title: 'Charizard',
+    },
   ];
 
   return (
@@ -45,36 +91,13 @@ export default function StylistDetailScreen() {
         </TouchableOpacity>
       </View>
 
+      <View className='flex-1 w-[90%] mx-auto'>
+        <ProfileCarousel slides={slides} />
+      </View>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={styles.imageCarousel}>
-          <ScrollView
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            style={styles.carouselScroll}
-          >
-            {images.map((imageUri, index) => (
-              <Image
-                key={index}
-                source={{ uri: imageUri }}
-                style={styles.carouselImage}
-                resizeMode="cover"
-              />
-            ))}
-          </ScrollView>
-          
-          <View style={styles.pagination}>
-            {images.map((_, index) => (
-              <View
-                key={index}
-                style={[styles.paginationDot, index === 0 && styles.activeDot]}
-              />
-            ))}
-          </View>
-        </View>
 
         <View style={styles.content}>
-          <Text style={styles.stylistName}>{stylist.name}</Text>
+          <Text style={styles.stylistName} className='font-ThunderSemiBold'>{stylist.name}</Text>
           
           <View style={styles.statsContainer}>
             <View style={styles.stat}>
